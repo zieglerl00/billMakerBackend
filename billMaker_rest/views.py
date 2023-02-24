@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from billMaker_rest.serializers.serializers import UserSerializer, GroupSerializer
 
 
@@ -19,4 +22,9 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+
+
+class TestView(APIView):
+    def get(self, request):
+        data = {"test": "test"}
+        return Response(data)
